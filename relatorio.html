@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prestação de Contas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1c1f35;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 32px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 14px 40px rgba(33, 49, 97, 0.12);
+        }
+
+        h1, h2 {
+            margin: 0 0 18px;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #0f234d;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #30427e;
+            border-bottom: 1px solid #e1e6f2;
+            padding-bottom: 8px;
+            margin-top: 32px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px 22px;
+            margin-top: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            color: #344069;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d7dce9;
+            border-radius: 10px;
+            background: #fafbff;
+            font-size: 1rem;
+            color: #1f2540;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4057e8, #0d3f9a);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(64, 87, 232, 0.18);
+        }
+
+        .resultado {
+            margin-top: 22px;
+            padding: 20px;
+            background: #f2f5ff;
+            border-radius: 14px;
+            border: 1px solid #d9e0ff;
+        }
+
+        .resultado p {
+            margin: 12px 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .resultado strong {
+            display: inline-block;
+            min-width: 110px;
+            color: #0f234d;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                margin: 16px;
+                padding: 18px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Prestação de Contas</h1>
+
+    <h2>Entradas</h2>
+
+    <label>Saldo anterior</label>
+    <input type="number" id="saldoAnterior" step="0.01">
+
+    <label>Sétima / PIX</label>
+    <input type="number" id="setimaPix" step="0.01">
+
+    <label>Sacola</label>
+    <input type="number" id="sacola" step="0.01">
+
+    <label>Venda de material</label>
+    <input type="number" id="vendaMaterial" step="0.01">
+
+
+    <h2>Despesas</h2>
+
+    <label>Aluguel</label>
+    <input type="number" id="aluguel" step="0.01">
+
+    <label>Repasse</label>
+    <input type="number" id="repasse" step="0.01">
+
+    <label>Mantimentos</label>
+    <input type="number" id="mantimentos" step="0.01">
+
+    <label>Literatura</label>
+    <input type="number" id="literatura" step="0.01">
+
+
+    <button onclick="calcularPrestacao()">
+        Calcular prestação
+    </button>
+
+
+    <h2>Resultado</h2>
+
+    <p>
+        Total de entradas:
+        <strong id="totalEntradas">R$ 0,00</strong>
+    </p>
+
+    <p>
+        Total de saídas:
+        <strong id="totalSaidas">R$ 0,00</strong>
+    </p>
+
+    <p>
+        Saldo atual:
+        <strong id="saldoAtual">R$ 0,00</strong>
+    </p>
+</div>
+
+    <script src="relatorio.js"></script>
+
+</body>
+</html>
