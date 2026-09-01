@@ -3,178 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Prestação de Contas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6fb;
-            color: #1c1f35;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 32px auto;
-            padding: 24px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 14px 40px rgba(33, 49, 97, 0.12);
-        }
-
-        h1, h2 {
-            margin: 0 0 18px;
-            font-weight: 700;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #0f234d;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            color: #30427e;
-            border-bottom: 1px solid #e1e6f2;
-            padding-bottom: 8px;
-            margin-top: 32px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px 22px;
-            margin-top: 16px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-            color: #344069;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #d7dce9;
-            border-radius: 10px;
-            background: #fafbff;
-            font-size: 1rem;
-            color: #1f2540;
-            box-sizing: border-box;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 14px 22px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #4057e8, #0d3f9a);
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 24px rgba(64, 87, 232, 0.18);
-        }
-
-        .resultado {
-            margin-top: 22px;
-            padding: 20px;
-            background: #f2f5ff;
-            border-radius: 14px;
-            border: 1px solid #d9e0ff;
-        }
-
-        .resultado p {
-            margin: 12px 0;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .resultado strong {
-            display: inline-block;
-            min-width: 110px;
-            color: #0f234d;
-        }
-
-        @media (max-width: 640px) {
-            .container {
-                margin: 16px;
-                padding: 18px;
-            }
-
-            button {
-                width: 100%;
-            }
-        }
-    </style>
+    <title>Sistema de Agendamento de Clientes</title>
+    <!-- Bootstrap CSS para um design moderno e responsivo -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<body class="bg-light">
 
-<body>
-    <div class="container">
-        <h1>Prestação de Contas</h1>
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary"><i class="fa-solid fa-calendar-days me-2"></i>Agendamento de Clientes</h1>
+            <p class="text-muted">Gerencie seus horários e atendimento de forma simples e rápida</p>
+        </header>
 
-    <h2>Entradas</h2>
+        <div class="row g-4">
+            <!-- Formulário de Cadastro -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0"><i class="fa-solid fa-user-plus me-2"></i>Novo Agendamento</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="formAgendamento">
+                            <div class="mb-3">
+                                <label for="nomeCliente" class="form-label">Nome do Cliente</label>
+                                <input type="text" class="form-control" id="nomeCliente" required placeholder="Ex: Maria Silva">
+                            </div>
+                            <div class="mb-3">
+                                <label for="servico" class="form-label">Serviço / Atendimento</label>
+                                <input type="text" class="form-control" id="servico" required placeholder="Ex: Consulta, Manutenção, Corte...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="data" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="horario" class="form-label">Horário</label>
+                                <input type="time" class="form-control" id="horario" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">WhatsApp / Telefone</label>
+                                <input type="text" class="form-control" id="telefone" placeholder="Ex: 81999998888">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100"><i class="fa-solid fa-check me-2"></i>Salvar Agendamento</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-    <label>Saldo anterior</label>
-    <input type="number" id="saldoAnterior" step="0.01">
+            <!-- Listagem e Filtros -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                        <h5 class="card-title mb-0 text-secondary"><i class="fa-solid fa-list me-2"></i>Lista de Agendamentos</h5>
+                        <div class="d-flex gap-2">
+                            <input type="date" id="filtroData" class="form-control form-control-sm" placeholder="Filtrar por data">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="limparFiltro()">Limpar</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Serviço</th>
+                                        <th>Data/Hora</th>
+                                        <th>Status</th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaAgendamentos">
+                                    <!-- Os dados inseridos aparecerão aqui dinamicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <label>Sétima / PIX</label>
-    <input type="number" id="setimaPix" step="0.01">
+    <!-- Script de Funcionamento -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarAgendamentos();
 
-    <label>Sacola</label>
-    <input type="number" id="sacola" step="0.01">
+            document.getElementById('formAgendamento').addEventListener('submit', function(e) {
+                e.preventDefault();
+                salvarAgendamento();
+            });
 
-    <label>Venda de material</label>
-    <input type="number" id="vendaMaterial" step="0.01">
+            document.getElementById('filtroData').addEventListener('change', function() {
+                carregarAgendamentos(this.value);
+            });
+        });
 
+        function obterAgendamentos() {
+            return JSON.parse(localStorage.getItem('agendamentos')) || [];
+        }
 
-    <h2>Despesas</h2>
+        function salvarAgendamento() {
+            const nome = document.getElementById('nomeCliente').value;
+            const servico = document.getElementById('servico').value;
+            const data = document.getElementById('data').value;
+            const horario = document.getElementById('horario').value;
+            const telefone = document.getElementById('telefone').value.replace(/\D/g, '');
 
-    <label>Aluguel</label>
-    <input type="number" id="aluguel" step="0.01">
+            const novoAgendamento = {
+                id: Date.now(),
+                nome,
+                servico,
+                data,
+                horario,
+                telefone,
+                status: 'Pendente'
+            };
 
-    <label>Repasse</label>
-    <input type="number" id="repasse" step="0.01">
+            const agendamentos = obterAgendamentos();
+            agendamentos.push(novoAgendamento);
+            localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
 
-    <label>Mantimentos</label>
-    <input type="number" id="mantimentos" step="0.01">
+            document.getElementById('formAgendamento').reset();
+            carregarAgendamentos();
+        }
 
-    <label>Literatura</label>
-    <input type="number" id="literatura" step="0.01">
+        function carregarAgendamentos(filtro = '') {
+            const tbody = document.getElementById('tabelaAgendamentos');
+            tbody.innerHTML = '';
 
+            let agendamentos = obterAgendamentos();
 
-    <button onclick="calcularPrestacao()">
-        Calcular prestação
-    </button>
+            if (filtro) {
+                agendamentos = agendamentos.filter(a => a.data === filtro);
+            }
 
+            // Ordenar por data e horário
+            agendamentos.sort((a, b) => new Date(`${a.data}T${a.horario}`) - new Date(`${b.data}T${b.horario}`));
 
-    <h2>Resultado</h2>
+            if (agendamentos.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Nenhum agendamento encontrado.</td></tr>`;
+                return;
+            }
 
-    <p>
-        Total de entradas:
-        <strong id="totalEntradas">R$ 0,00</strong>
-    </p>
+            agendamentos.forEach(a => {
+                const [ano, mes, dia] = a.data.split('-');
+                const dataFormatada = `${dia}/${mes}/${ano}`;
 
-    <p>
-        Total de saídas:
-        <strong id="totalSaidas">R$ 0,00</strong>
-    </p>
+                let badgeStatus = 'bg-warning text-dark';
+                if (a.status === 'Concluído') badgeStatus = 'bg-success';
+                if (a.status === 'Cancelado') badgeStatus = 'bg-danger';
 
-    <p>
-        Saldo atual:
-        <strong id="saldoAtual">R$ 0,00</strong>
-    </p>
-</div>
+                let acaoWhatsApp = a.telefone ? `<a href="https://wa.me/55${a.telefone}?text=Olá%20${encodeURIComponent(a.nome)},%20passando%20para%20confirmar%20seu%20agendamento%20de%20${encodeURIComponent(a.servico)}%20para%20o%20dia%20${dataFormatada}%20às%20${a.horario}." target="_blank" class="btn btn-sm btn-success" title="Enviar WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>` : '';
 
-    <script src="relatorio.js"></script>
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${a.nome}</strong></td>
+                    <td>${a.servico}</td>
+                    <td>${dataFormatada} às ${a.horario}</td>
+                    <td><span class="badge ${badgeStatus}" style="cursor:pointer;" onclick="alternarStatus(${a.id})" title="Clique para alterar status">${a.status}</span></td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            ${acaoWhatsApp}
+                            <button class="btn btn-sm btn-outline-danger" onclick="excluirAgendamento(${a.id})" title="Excluir"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
 
+        function alternarStatus(id) {
+            let agendamentos = obterAgendamentos();
+            agendamentos = agendamentos.map(a => {
+                if (a.id === id) {
+                    if (a.status === 'Pendente') a.status = 'Concluído';
+                    else if (a.status === 'Concluído') a.status = 'Cancelado';
+                    else a.status = 'Pendente';
+                }
+                return a;
+            });
+            localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+            carregarAgendamentos(document.getElementById('filtroData').value);
+        }
+
+        function excluirAgendamento(id) {
+            if (confirm('Deseja realmente excluir este agendamento?')) {
+                let agendamentos = obterAgendamentos();
+                agendamentos = agendamentos.filter(a => a.id !== id);
+                localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+                carregarAgendamentos(document.getElementById('filtroData').value);
+            }
+        }
+
+        function limparFiltro() {
+            document.getElementById('filtroData').value = '';
+            carregarAgendamentos();
+        }
+    </script>
 </body>
 </html>
