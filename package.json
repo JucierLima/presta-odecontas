@@ -1,0 +1,27 @@
+{
+  "name": "sistema-podologia",
+  "version": "1.0.0",
+  "description": "Sistema profissional de agendamento e gestão para podologia",
+  "private": true,
+  "workspaces": [
+    "apps/site",
+    "apps/painel",
+    "apps/api",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=@sistema-podologia/api",
+    "dev:site": "npm start --workspace=@sistema-podologia/site",
+    "dev:painel": "npm start --workspace=@sistema-podologia/painel",
+    "build:api": "npm run build --workspace=@sistema-podologia/api",
+    "build:site": "npm run build --workspace=@sistema-podologia/site",
+    "build:painel": "npm run build --workspace=@sistema-podologia/painel",
+    "build": "npm run build:api && npm run build:site && npm run build:painel",
+    "test": "npm test -r"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
